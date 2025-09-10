@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-maven-eks-app
+  labels:
+    app: java-maven-eks-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: java-maven-eks-app
+  template:
+    metadata:
+      labels:
+        app: java-maven-eks-app
+    spec:
+      containers:
+      - name: java-maven-eks-app
+        image: <your-docker-image>:<tag>
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "prod"
